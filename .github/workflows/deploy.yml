@@ -24,3 +24,15 @@ jobs:
 
       - name: Deploy via Render
         run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+
+      - name: Verificar se o serviço está rodando
+        run: |
+          for i in {1..10}; do
+            if curl -sSf https://fiap-bff.onrender.com/health; then
+              echo "Serviço está rodando!"
+              exit 0
+            fi
+            echo "Aguardando serviço iniciar..."
+            sleep 10
+          done
+          echo "Serviço não iniciou a tempo." && exit 1

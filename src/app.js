@@ -9,5 +9,9 @@ app.use(express.json());
 
 app.use('/ask', askRoute);
 
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`BFF rodando na porta ${PORT}`));
