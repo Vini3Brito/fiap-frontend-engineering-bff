@@ -2,11 +2,23 @@ require('dotenv').config();
 require('newrelic');
 
 const express = require('express');
+const rateLimit = require('express-rate-limit'); // Importa o rate limit
 const askRoute = require('./routes/ask');
 
 const app = express();
 app.use(express.json());
 
+// Configura o rate limit
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 10, // Limite de 10 requisições por IP
+  message: { error: 'Muitas requisições. Tente novamente mais tarde.' },
+});
+
+// Aplica o rate limit globalmente
+app.use(limiter);
+
+// app.use('/ask', limiter, askRoute);
 app.use('/ask', askRoute);
 
 app.get('/health', (req, res) => {
