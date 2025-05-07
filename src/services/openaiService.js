@@ -1,12 +1,12 @@
 const axios = require('axios');
 
 async function askOpenAI() {
-  const prompt = `Elabore 5 palavras distintas e seus respectivos significados e um exemplo de uso. Retorne um JSON no formato [{word, description, useCase}]. Não adicione quebras de linhas.`;
+  const prompt = `Invente 5 títulos de fofocas sobre celebridades atuais, um "slug" à ser utilizado como parte da URL, uma breve descrição  (máximo 100 caracteres) e o conteúdo completo da fofoca (máximo 500 caracteres). Retorne um JSON no formato [{title, slug, description, content}]. Não adicione quebras de linhas.`;
 
   const response = await axios.post('https://api.openai.com/v1/chat/completions', {
     model: 'gpt-4',
     messages: [
-      { role: 'system', content: 'Responda somente questões relacionadas ao ensino de inglês.' },
+      { role: 'system', content: 'Não gere nenhum conteúdo ofensivo ou cite pessoas reais.' },
       { role: 'user', content: prompt }
     ]
   }, {
