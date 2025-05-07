@@ -1,19 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const { askOpenAI } = require('../services/openaiService');
-const newrelic = require('newrelic'); // Importa o New Relic
 
 router.get('/', async (req, res) => {
   try {
     const result = await askOpenAI();
     res.json(JSON.parse(result.answer));
   } catch (err) {
-    // Log customizado para o New Relic
-    newrelic.noticeError(err, {
-      customMessage: 'OpenAiCommunicationError',
-      endpoint: '/ask',
-      timestamp: new Date().toISOString(),
-    });
+    console.error('Erro ao consultar o OpenAI: ', err)
 
     res.status(500).json({ error: 'Erro ao consultar o OpenAI' });
   }
