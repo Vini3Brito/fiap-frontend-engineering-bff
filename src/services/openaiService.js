@@ -4,7 +4,7 @@ async function askOpenAI() {
   const prompt = `Invente 5 títulos de fofocas sobre celebridades atuais, um "slug" à ser utilizado como parte da URL, uma breve descrição  (máximo 100 caracteres) e o conteúdo completo da fofoca (máximo 500 caracteres). Retorne um JSON no formato [{title, slug, description, content}]. Não adicione quebras de linhas.`;
 
   const response = await axios.post('https://api.openai.com/v1/chat/completions', {
-    model: 'gpt-4',
+    model: 'gpt-3.5-turbo',
     messages: [
       { role: 'system', content: 'Não gere nenhum conteúdo ofensivo ou cite pessoas reais.' },
       { role: 'user', content: prompt }
