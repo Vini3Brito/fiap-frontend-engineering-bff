@@ -12,7 +12,7 @@ app.use(express.json());
 // Configura o CORS
 const corsOptions = {
   origin: '*', // Permite todas as origens. Altere para um domínio específico, se necessário.
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+  methods: ['GET'], // Métodos permitidos
   allowedHeaders: ['Content-Type', 'Authorization'], // Cabeçalhos permitidos
 };
 app.use(cors(corsOptions));
@@ -32,10 +32,6 @@ app.use('/ask', askRoute);
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
-});
-
-app.get('/teste', (req, res) => {
-  res.status(200).json({ status: 'nova rota' });
 });
 
 const PORT = process.env.PORT || 3000;
