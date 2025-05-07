@@ -18,8 +18,8 @@ app.use(cors(corsOptions));
 
 // Configura o rate limit
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutos
-  max: 20, // Limite de 20 requisições por IP
+  windowMs: 1 * 60 * 1000, // 15 minutos
+  max: 60, // Limite de 20 requisições por IP
   message: { error: 'Muitas requisições. Tente novamente mais tarde.' },
 });
 
