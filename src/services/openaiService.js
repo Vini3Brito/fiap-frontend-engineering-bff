@@ -1,3 +1,4 @@
+import defaultFofocas from './default-fofocas.json';
 const axios = require('axios');
 
 async function askOpenAI() {
@@ -30,7 +31,10 @@ async function askOpenAI() {
       console.log('Error', error.message);
     }
     console.log(error.config);
-    throw error;
+    return {
+      answer: defaultFofocas,
+      timestamp: new Date().toISOString()
+    }
   });
 
   const message = response.data.choices[0].message.content.trim();
